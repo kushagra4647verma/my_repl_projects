@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do list</title>
+    <style>
+        #topdiv {
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            font-family: Arial, Helvetica, sans-serif;
+            color: burlywood;
+            padding: 10px;
+        }
+        .tasks {
+            background-color: aliceblue;
+            display: flex;
+            justify-content: space-between;
+            width: 50%;
+            margin: 10px auto;
+            padding: 10px;
+            border: 1px solid gray;
+        }
+        #middiv {
+            background-color: aliceblue;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #botdiv {
+            background-color: aliceblue;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="topdiv">
+        <h1>TO-DO LIST</h1>
+    </div>
+    <div id="middiv"></div>
+    <div id="botdiv">
+        <input type="text" id="taskInput" placeholder="Add a task">
+        <button onclick="addtodo()">ADD</button>
+    </div>
+    <script>
+        let cnt = 1;
+
+        function addtodo() {
+    let val = document.getElementById("taskInput").value.trim();
+    if (val === "") return;
+
+    let taskId = `task${cnt}`;
+    let el = document.createElement("div");
+    el.id = taskId;
+    el.className = "tasks";
+
+    let spanEl = document.createElement("span");
+    spanEl.innerHTML = `Task ${cnt}: ${val}`;
+
+    let bel = document.createElement("button");
+    bel.innerHTML = "DELETE";
+    bel.onclick = function () {
+        deletetodo(taskId);
+    };
+
+    el.appendChild(spanEl);
+    el.appendChild(bel);
+    document.getElementById("middiv").appendChild(el);
+
+    document.getElementById("taskInput").value = "";
+    cnt++;
+}
+
+
+        function deletetodo(taskId) {
+            let el = document.getElementById(taskId);
+            if (el) el.remove();
+        }
+    </script>
+</body>
+</html>

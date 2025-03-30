@@ -11,17 +11,14 @@ users=[
     }
 ]
 app.use(express.json())
-app.get('/',function(req,res){
-    let patient=users[0].kidneys;
-    let count=0;
-    for(let i=0;i<patient.length;i++){
-        if(patient[i].healthy==true){
-            count+=1;
-        }
-    } 
-    let n=users[0].kidneys.length;
-    res.send(`${users[0].name}, You have ${n} kidneys and ${count} of them are healthy`);
-})
+app.get('/', function (req, res) {
+    let patient = users[0].kidneys;
+    let count = patient.filter(k => k.healthy).length;
+    let n = patient.length;
+
+    res.json({ message: `${users[0].name}, You have ${n} kidneys and ${count} of them are healthy` });
+});
+
 
 app.delete('/',function(req,res){
     let patient=users[0].kidneys;

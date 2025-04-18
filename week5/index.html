@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.7.6/axios.min.js"></script>
+
+</head>
+<body>
+    <div id="head">
+        Simple Calculator
+    </div>
+    <div>
+    <input class="box" id="a" placeholder="Enter a"></input>
+    <input class="box" id ="b" placeholder="Enter b"></input>
+    <input class="box" id ="c" placeholder="ad/mul/div/sub"></input>
+    </div>
+    <div id="result">
+    </div>
+    <div>
+        <button class="button" onclick="Calculate()">Calculate</button>
+    </div>
+    <script>
+        function Calculate(){
+            const a=document.querySelector("#a").value;
+            const b=document.querySelector("#b").value;
+            const c=document.querySelector("#c").value;
+            axios.post(`http://localhost:3000/${c}`,{
+                a:a,
+                b:b
+            }).then(response => {
+        document.getElementById("result").innerText = `Result: ${response.data.ans}`;
+    })
+
+        }
+    </script>
+</body>
+</html>

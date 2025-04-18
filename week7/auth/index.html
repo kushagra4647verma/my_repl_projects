@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authorizaion</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <input id="uname" placeholder="Username" type="text"></input> 
+    <input id="pwd" placeholder="Password" type="password"></input>
+    <div>
+        <button onclick="signup()">Sign up</button> 
+        <button onclick="signin()">Sign in</button> 
+    </div> 
+    <div id="info">
+        User info:  
+    </div>
+    <div>
+        <button onclick="logout()">Logout</button> 
+    </div>
+
+    <script>
+        async function signup(){
+            let name=document.querySelector("#uname").value;
+            let pwd=document.querySelector("#pwd").value;
+            const response=await axios.post("http://localhost:3000/signup",{
+                username: name,
+                password: pwd
+            })
+            alert("Sign Up successfull!")
+        }
+        async function signin(){
+            let name=document.querySelector("#uname").value;
+            let pwd=document.querySelector("#pwd").value;
+            let response=await axios.post("http://localhost:3000/signin",{
+                username: name,
+                password: pwd
+            })
+            localStorage.setItem("token",response.data.token);
+            alert("Sign in Successfull!")
+            userinfo();
+        }
+
+        async function userinfo(){
+            const response=await axios.get("http://localhost:3000/me",{
+                headers:{
+                    token: localStorage.getItem("token")
+                }
+            })
+            document.querySelector("#info").innerHTML=response.data.message;
+        }
+        function logout(){
+            localStorage.removeItem("token");
+            document.querySelector("#info").innerHTML = "Logged out!";
+        }
+    </script>
+</body>
+</html>

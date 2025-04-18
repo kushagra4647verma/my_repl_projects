@@ -1,0 +1,22 @@
+#head{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    justify-content: center;
+    background-color: aliceblue;
+    font-size: 50px;
+}
+
+.box{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.button{
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 50px;
+    display: flex;
+    justify-content:center;
+    
+}
